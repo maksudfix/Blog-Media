@@ -1,0 +1,215 @@
+﻿@model BlogMedia.Models.ViewModels.PostViewModel
+
+@{
+    ViewData["Title"] = "Create Post";
+}
+
+<style>
+    body {
+        background-color: #1e1e1e;
+        color: white;
+    }
+
+    .content-wrapper {
+        max-width: 1100px;
+        margin: 30px auto;
+        padding: 20px;
+    }
+
+    label {
+        color: white;
+        font-weight: 500;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+
+    textarea.form-control {
+        min-height: 400px;
+        resize: vertical;
+        padding: 15px;
+        font-size: 16px;
+    }
+
+    .validation-summary-errors ul {
+        list-style: none;
+        padding-left: 0;
+    }
+</style>
+
+<div class="content-wrapper">
+
+    
+    <div class="page-header">
+        <h2>Create Post</h2>
+
+        <a asp-action="Index" class="btn btn-secondary">
+            Back To List
+        </a>
+    </div>
+
+    
+    <form asp-action="Create"
+          method="post"
+          enctype="multipart/form-data">
+
+        
+        <div asp-validation-summary="All"
+             class="text-danger mb-3">
+        </div>
+
+        
+        <div class="mb-3">
+            <label asp-for="Post.Title"></label>
+
+            <input asp-for="Post.Title"
+                   class="form-control" />
+
+            <span asp-validation-for="Post.Title"
+                  class="text-danger"></span>
+        </div>
+
+        
+        <div class="mb-3">
+            <label asp-for="Post.CategoryId"></label>
+
+            <select asp-for="Post.CategoryId"
+                    asp-items="Model.Categories"
+                    class="form-select">
+
+                <option value="">
+                    Select Category
+                </option>
+
+            </select>
+
+            <span asp-validation-for="Post.CategoryId"
+                  class="text-danger"></span>
+        </div>
+
+        
+        <div class="mb-3">
+            <label asp-for="Post.Author"></label>
+
+            <input asp-for="Post.Author"
+                   class="form-control" />
+
+            <span asp-validation-for="Post.Author"
+                  class="text-danger"></span>
+        </div>
+
+        <!-- Content -->
+        <div class="mb-3">
+            <label asp-for="Post.Content"></label>
+
+            <textarea asp-for="Post.Content"
+                      class="form-control"
+                      rows="15"
+                      placeholder="Write your post content here...">
+            </textarea>
+
+            <span asp-validation-for="Post.Content"
+                  class="text-danger"></span>
+        </div>
+
+        
+        <div class="mb-3">
+            <label asp-for="FeatureImage"></label>
+
+            <input asp-for="FeatureImage"
+                   type="file"
+                   class="form-control" />
+
+            <span asp-validation-for="FeatureImage"
+                  class="text-danger"></span>
+        </div>
+
+        
+        <div class="mt-4">
+            <button type="submit"
+                    class="btn btn-primary">
+                Create
+            </button>
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+                Back To List
+            </a>
+        </div>
+
+    </form>
+
+</div>
+@section Scripts
+{
+    <script src="https://cdn.tiny.cloud/1/q1jiq2h394osmskmohaofq0ual5f4vkm3753y5as9cb4jccd/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+    <script>
+        // Only initialize TinyMCE on specific textareas with a distinct selector
+        tinymce.init({
+            selector: '.tinymce-editor', // Changed from 'textarea' to be more specific
+            plugins: [
+                'anchor', 'autolink', 'charmap', 'codesample', 'emoticons',
+                'link', 'lists', 'media', 'searchreplace', 'table',
+                'visualblocks', 'wordcount', 'checklist', 'mediaembed',
+                'casechange', 'formatpainter', 'pageembed', 'a11ychecker',
+                'tinymcespellchecker', 'permanentpen', 'powerpaste',
+                'advtable', 'advcode', 'advtemplate', 'tinymceai',
+                'uploadcare', 'mentions', 'tinycomments', 'tableofcontents',
+                'footnotes', 'mergetags', 'autocorrect', 'typography',
+                'inlinecss', 'markdown', 'importword', 'exportword', 'exportpdf'
+            ],
+            toolbar: 'undo redo | tinymceai-chat tinymceai-quickactions tinymceai-review | blocks fontfamily fontsize | bold italic underline strikethrough | link media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography uploadcare | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' },
+            ],
+            tinymceai_token_provider: async () => {
+                await fetch(`https://demo.api.tiny.cloud/1/q1jiq2h394osmskmohaofq0ual5f4vkm3753y5as9cb4jccd/auth/random`, {
+                    method: "POST",
+                    credentials: "include"
+                });
+                return {
+                    token: await fetch(`https://demo.api.tiny.cloud/1/q1jiq2h394osmskmohaofq0ual5f4vkm3753y5as9cb4jccd/jwt/tinymceai`, {
+                        credentials: "include"
+                    }).then(r => r.text())
+                };
+            },
+            uploadcare_public_key: '6ae63503f43541dc018c',
+
+            // Additional settings to prevent interference
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+            skin: 'oxide',
+            height: 400,
+            menubar: true,
+            branding: true,
+            promotion: false,
+            resize: true,
+
+            // Make it more compatible with existing code
+            setup: function(editor) {
+                editor.on('init', function() {
+                    console.log('TinyMCE initialized on .tinymce-editor');
+                });
+            }
+        });
+
+        // Optional: Add fallback for textareas without the class
+        $(document).ready(function() {
+            // This ensures only textareas with the 'tinymce-editor' class get initialized
+            // Any textarea without this class will remain as normal textareas
+            $('textarea:not(.tinymce-editor)').each(function() {
+                // You can add any custom behavior here for non-TinyMCE textareas
+                // or just leave them as standard textareas
+            });
+        });
+    </script>
+    <partial name="_ValidationScriptsPartial" />
+}

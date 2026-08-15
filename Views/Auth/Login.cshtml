@@ -1,0 +1,116 @@
+﻿@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<style>
+    body {
+        background-color: #1e1e1e;
+        color: white;
+    }
+
+    .content-wrapper {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+
+    label {
+        color: white;
+        font-weight: 500;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .form-control {
+        background-color: #2b2b2b;
+        color: white;
+        border: 1px solid #555;
+    }
+
+        .form-control:focus {
+            background-color: #2b2b2b;
+            color: white;
+            border-color: #0d6efd;
+            box-shadow: none;
+        }
+
+    .validation-summary-errors ul {
+        list-style: none;
+        padding-left: 0;
+        margin-bottom: 0;
+    }
+
+    .text-danger {
+        color: #ff6b6b !important;
+    }
+</style>
+
+<div class="content-wrapper">
+
+    <div class="page-header">
+        <h2>Login</h2>
+
+        <a asp-controller="Post"
+           asp-action="Index"
+           class="btn btn-secondary">
+            Back To List
+        </a>
+    </div>
+
+    <form asp-controller="Auth"
+          asp-action="Login"
+          method="post">
+
+        <div asp-validation-summary="ModelOnly"
+             class="text-danger mb-3">
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Email"></label>
+            <input asp-for="Email"
+                   class="form-control"
+                   type="email"
+                   autocomplete="email" />
+            <span asp-validation-for="Email"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Password"></label>
+            <input asp-for="Password"
+                   class="form-control"
+                   type="password"
+                   autocomplete="current-password" />
+            <span asp-validation-for="Password"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit"
+                    class="btn btn-primary">
+                Login
+            </button>
+
+            <a asp-controller="Post"
+               asp-action="Index"
+               class="btn btn-secondary">
+                Cancel
+            </a>
+        </div>
+
+    </form>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

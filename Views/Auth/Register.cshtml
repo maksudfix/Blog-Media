@@ -1,0 +1,105 @@
+﻿@model BlogMedia.Models.ViewModels.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<style>
+    body {
+        background-color: #1e1e1e;
+        color: white;
+    }
+
+    .content-wrapper {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    label {
+        color: white;
+        font-weight: 500;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+
+    .validation-summary-errors ul {
+        list-style: none;
+        padding-left: 0;
+    }
+</style>
+
+<div class="content-wrapper">
+
+    <div class="page-header">
+        <h2>Register</h2>
+
+        <a asp-controller="Post"
+           asp-action="Index"
+           class="btn btn-secondary">
+            Back To List
+        </a>
+    </div>
+
+    <form asp-controller="Auth"
+          asp-action="Register"
+          method="post">
+
+        <div asp-validation-summary="ModelOnly"
+             class="text-danger mb-3">
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Email"></label>
+            <input asp-for="Email"
+                   type="email"
+                   class="form-control" />
+            <span asp-validation-for="Email"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Password"></label>
+            <input asp-for="Password"
+                   type="password"
+                   class="form-control" />
+            <span asp-validation-for="Password"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ConfirmPassword"></label>
+            <input asp-for="ConfirmPassword"
+                   type="password"
+                   class="form-control" />
+            <span asp-validation-for="ConfirmPassword"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit"
+                    class="btn btn-primary">
+                Register
+            </button>
+
+            <a asp-controller="Post"
+               asp-action="Index"
+               class="btn btn-secondary">
+                Cancel
+            </a>
+        </div>
+
+    </form>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,122 @@
+﻿@using BlogMedia.Helpers
+@model IEnumerable<Post>
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Blog Posts";
+}
+
+<div class="container py-4">
+
+    <!-- Header Section -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold mb-0">Blog Posts</h2>
+            <small class="text-muted">Explore the latest articles</small>
+        </div>
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <a asp-controller="Post"
+               asp-action="Create"
+               class="btn btn-primary">
+                Create New Post
+            </a>
+        }
+    </div>
+
+    <!-- Category Filter Buttons -->
+    @if (ViewBag.Categories != null)
+    {
+        <div class="mb-4">
+            <a asp-controller="Post"
+               asp-action="Index"
+               class="btn btn-sm btn-dark me-2 px-3 py-2">
+                All
+            </a>
+
+            @foreach (var category in ViewBag.Categories)
+            {
+                <a asp-controller="Post"
+                   asp-action="Index"
+                   asp-route-categoryId="@category.Id"
+                   class="btn btn-sm btn-warning me-2 px-3 py-2">
+                    @category.Name
+                </a>
+            }
+        </div>
+    }
+
+    <!-- Blog Posts Grid -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var post in Model)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0">
+
+                        <!-- Featured Image -->
+                        <img src="@(string.IsNullOrEmpty(post.FeatureImagePath) ? "/images/default-post.jpg" : post.FeatureImagePath)"
+                             class="card-img-top"
+                             alt="@post.Title"
+                             style="height:240px; object-fit:cover;" />
+
+                        <!-- Card Body -->
+                        <div class="card-body">
+
+                            @if (post.Category != null)
+                            {
+                                <span class="badge bg-secondary mb-2">
+                                    @post.Category.Name
+                                </span>
+                            }
+
+                            <h5 class="card-title fw-bold">
+                                @post.Title
+                            </h5>
+
+                            <p class="text-muted small mb-3">
+                                Published on @post.PublishDate.ToString("dd MMM yyyy")
+                            </p>
+
+                            @{
+                                var content = RemoveHtmlTagHelper.RemoveHtmlTags(post.Content ?? string.Empty);
+                            }
+                            <p class="card-text">
+                                @(content.Length > 100 ? content.Substring(0, 100) + "..." : content)
+                            </p>
+
+                            <p class="text-muted mb-0">
+                                By <strong>@post.Author</strong>
+                            </p>
+                        </div>
+
+                        <!-- Card Footer -->
+                        <div class="card-footer bg-white border-0">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a asp-controller="Post"
+                                   asp-action="Detail"
+                                   asp-route-id="@post.Id"
+                                   class="btn btn-primary btn-sm">
+                                    Read More
+                                </a>
+
+                                <small class="text-muted">
+                                    @post.PublishDate.ToString("hh:mm tt")
+                                </small>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12 text-center py-5">
+                <p class="text-muted">No blog posts available at the moment.</p>
+            </div>
+        }
+    </div>
+
+</div>
