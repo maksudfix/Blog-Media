@@ -180,7 +180,7 @@ Make sure the following are installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/maksudhx/Blog-Media.git
+git clone https://github.com/maksudfix/Blog-Media
 cd Blog-Media
 ```
 
@@ -247,5 +247,6 @@ Blog Media was built to demonstrate practical experience with:
 * **UI/UX & Discovery**: Modernize dashboard design and expand content categories for better navigation.
 
 ## Author
-Maksud Mubin
+Maksud Mubin (Trex Development)
+https://github.com/maksudfix
 
