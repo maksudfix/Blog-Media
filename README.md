@@ -77,78 +77,21 @@ Provide the presentation layer using Razor, HTML, CSS, JavaScript, Bootstrap, an
 
 ## Project Structure
 
-Blog Media/
-├── Controllers/
-│   ├── AuthController.cs
-│   ├── HomeController.cs
-│   └── PostController.cs
-│
-├── Data/
-│   └── AppDbContext.cs
-│
-├── Helpers/
-│   └── RemoveHtmlTagHelper.cs
-│
-├── Models/
-│   ├── ViewModels/
-│   │   ├── EditViewModel.cs
-│   │   ├── LoginViewModel.cs
-│   │   ├── PostViewModel.cs
-│   │   └── RegisterViewModel.cs
-│   ├── Category.cs
-│   ├── Comment.cs
-│   └── Post.cs
-│
-├── Views/
-│   ├── Auth/
-│   │   ├── Login.cshtml
-│   │   ├── Register.cshtml
-│   │   └── AccessDenied.cshtml
-│   ├── Home/
-│   ├── Post/
-│   │   ├── Create.cshtml
-│   │   ├── Edit.cshtml
-│   │   ├── Delete.cshtml
-│   │   ├── Detail.cshtml
-│   │   └── Index.cshtml
-│   └── Shared/
-│       ├── _Layout.cshtml
-│       └── _Navbar.cshtml
-│
-├── Migrations/
-├── appsettings.json
-├── Program.cs
-└── Blog Media.csproj
+<img src="images/Blog-Media-Structure.png" alt="Blog Media Project Structure" width="500"><img width="900" height="500" alt="image" src="https://github.com/user-attachments/assets/9364015f-e19a-4cd1-801a-73c930a683aa" />
 
-
-## Tech Stack
-
-| Technology                  | Purpose                          |
-| --------------------------- | -------------------------------- |
-| **ASP.NET Core MVC**        | Web application framework        |
-| **C#**                      | Application programming language |
-| **Entity Framework Core**   | ORM and database access          |
-| **SQL Server / LocalDB**    | Relational database              |
-| **ASP.NET Core Identity**   | Authentication and authorization |
-| **Razor Views**             | Server-side UI rendering         |
-| **Bootstrap**               | Responsive UI components         |
-| **HTML / CSS / JavaScript** | Frontend development             |
-
-
-### Prerequisites
+## Prerequisites
 
 Make sure the following are installed:
 
-- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
-- SQL Server, SQL Server Express, or SQL Server LocalDB
-- Visual Studio 2026 or VS Code with the C# Dev Kit
-- Entity Framework Core CLI (`dotnet-ef`)
-
+* [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
+* SQL Server, SQL Server Express, or SQL Server LocalDB
+* Visual Studio 2026 or VS Code with the C# Dev Kit
+* Entity Framework Core CLI (`dotnet-ef`)
 > **Target Framework:** `.NET 10`
->
-> **ASP.NET Core Identity:** `10.0.0`
->
-> **Entity Framework Core:** `10.0.0`
+> **Install From Manage NutGet Packages:**
+  Microsoft.AspNetCore.Identity.EntityFrameworkCore Version="10.0.0" 
+  Microsoft.EntityFrameworkCore.SqlServer Version="10.0.0"
+  Microsoft.EntityFrameworkCore.Tools" Version="10.0.0"
 
 
 ### 1. Clone the Repository
@@ -166,8 +109,6 @@ Update the connection string in `appsettings.json` according to your SQL Server 
     "DefaultConnection": "Server=HP-TREX\\SQLEXPRESS; Database = blogmedia_db; Trusted_Connection = True; TrustServerCertificate = True;"
   }
 
-> For production environments, use environment variables, User Secrets, Azure Key Vault, or another secure configuration provider rather than committing sensitive connection information to source control.
-
 ### 3. Apply Entity Framework Migrations
 
 **Database & Migrations**
@@ -184,18 +125,7 @@ The application will display its local URL in the terminal. Open that URL in you
 For example:
 https://localhost:7118
 
-## Default Development Credentials
-
-For development/demo purposes, the application seeds a default administrator account during startup.
-
-| Field    |  Value            |
-| ---------|-----------------  |
-| Role     | `Admin`           |
-| Email    | `admin@gmail.com` |
-| Password | `admin`           |
-
-
-## 🎯 Project Goals
+## Project Goals
 
 Blog Media was built to demonstrate practical experience with:
 
@@ -214,11 +144,11 @@ Blog Media was built to demonstrate practical experience with:
 
 ## Future Improvements
 
-* **CI/CD & Testing**: Add GitHub Actions automated deployment pipelines, unit tests, and integration test coverage.
-* **Architecture & Clean Code**: Refactor controllers to follow SOLID principles, add centralized exception handling, and implement structured logging.
-* **Performance & Scale**: Implement Redis caching, database query optimizations, and pagination for large datasets.
-* **Enhanced Authoring**: Upgrade to a rich-text WYSIWYG editor with AI-assisted drafting, summarizing, and proofreading.
-* **UI/UX & Discovery**: Modernize dashboard design and expand content categories for better navigation.
+**CI/CD & Testing**: Add GitHub Actions automated deployment pipelines, unit tests, and integration test coverage.
+**Architecture & Clean Code**: Refactor controllers to follow SOLID principles, add centralized exception handling, and implement structured logging.
+**Performance & Scale**: Implement Redis caching, database query optimizations, and pagination for large datasets.
+**Enhanced Authoring**: Upgrade to a rich-text WYSIWYG editor with AI-assisted drafting, summarizing, and proofreading.
+**UI/UX & Discovery**: Modernize dashboard design and expand content categories for better navigation.
 
 ## Author
 Maksud Mubin (Trex Development)
