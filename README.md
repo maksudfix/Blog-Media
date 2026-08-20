@@ -49,35 +49,9 @@
 
 ##  Architecture
 
-Blog Media follows the Model-View-Controller (MVC) architectural pattern and uses ViewModels to separate HTTP input models from application entities.
+Blog Media follows the Model-View-Controller (MVC) architectural pattern.
 
- ┌───────────────────────────────┐
- │          Razor Views          │
- │       UI & Layout Render      │
- └───────────────┬───────────────┘
-                 │
-                 │    ViewModels
-                 ▼
-┌─────────────────────────────────────────────────┐
-│                 Controllers                     │
-│                                                 │
-│  AuthController  HomeController  PostController │
-└───────────────┬───────────────────────┬─────────┘
-                │                       │
-                ▼                       ▼
-┌──────────────────────────┐  ┌──────────────────────────┐
-│    ASP.NET Core Identity │  │   Entity Framework Core  │
-│                          │  │                          │
-│ UserManager              │  │       AppDbContext       │
-│ RoleManager              │  │                          │
-└────────────┬─────────────┘  └────────────┬─────────────┘
-             │                             │
-             └──────────────┬──────────────┘
-                            ▼
-                  ┌─────────────────────┐
-                  │      SQL Server     │
-                  │                     |
-                  └─────────────────────┘
+<img src="images/Blog-Media png" alt="Blog Media Architecture" width="500"><img width="900" height="500" alt="image" src="https://github.com/user-attachments/assets/f19ba28b-b17b-43b1-b0b1-c206a7f98c9b" />
 
 ### Architecture Overview
 
