@@ -1,6 +1,6 @@
 # Blog Media
 
-> A full-stack, responsive blogging platform built with ASP.NET Core MVC, Entity Framework Core, and SQL Server. The application features authentication, role-based access control, category-based filtering, post management, commenting, and custom Razor Tag Helpers.
+A full-stack, responsive blogging platform built with ASP.NET Core MVC, Entity Framework Core, and SQL Server, featuring authentication, role-based authorization, category-based filtering, post management, and commenting for authenticated users.
 
 ## Features
 
